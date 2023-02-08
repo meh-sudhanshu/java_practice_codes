@@ -27,13 +27,25 @@ public class Main {
         start = deleteAtEnd(start);
         printLinkedList(start);
         System.out.println();
-        start = deleteValue(8);
+        start = deleteValue(1 , start);
         printLinkedList(start);
         System.out.println();
     }
 
-    public static Node deleteValue(int val){
-        
+    public static Node deleteValue(int val,Node start){
+        Node temp = start;
+        if(temp.value == val){
+            start = start.next;
+            return start;
+        }
+
+        while(temp.next.value != val){
+            temp = temp.next;
+        }
+
+        temp.next = temp.next.next;
+
+        return start;
     }
 
 
