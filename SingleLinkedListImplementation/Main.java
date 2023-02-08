@@ -14,6 +14,69 @@ public class Main {
         Node start;
         start = convertToLinkedList(arr);
         printLinkedList(start);
+        System.out.println();
+        start = addToStart(10,start);
+        printLinkedList(start);
+        System.err.println();
+        start = deleteFirstNode(start);
+        printLinkedList(start);
+        System.out.println();
+        start = deleteFirstNode(start);
+        printLinkedList(start);
+        System.out.println();
+        start = deleteAtEnd(start);
+        printLinkedList(start);
+        System.out.println();
+        start = deleteValue(8);
+        printLinkedList(start);
+        System.out.println();
+    }
+
+    public static Node deleteValue(int val){
+        
+    }
+
+
+    public static Node deleteAtEnd(Node start){
+        if(start == null){
+            System.out.println("linked list is empty");
+        }
+        Node temp = start;
+        while(temp.next.next != null){
+            temp = temp.next;
+        }
+
+        temp.next = null;
+
+
+        return start;
+    }
+
+
+
+
+    public static Node deleteFirstNode(Node start){
+        if(start == null){
+            System.err.println("linked list is empty");
+        }else{
+            start = start.next;
+        }
+
+        return start;
+    }
+
+    public static Node addToStart(int val , Node start){
+        if(start == null){
+            start = new Node(val);
+            return start;
+        }
+        Node temp = new Node(val);
+        temp.next = start;
+        start = temp;
+
+        return start;
+
+
     }
     
 
@@ -25,7 +88,7 @@ public class Main {
         
         while(start !=null)
         {
-            System.out.println(start.value);
+            System.out.print(start.value+" ");
             start = start.next;
         }
     }
