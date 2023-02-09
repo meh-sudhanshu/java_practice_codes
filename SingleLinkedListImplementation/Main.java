@@ -10,7 +10,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int[] arr = {3,2,5,1,7,8};
+        int[] arr = {3,2,5,1,7,8,9,0,5,6,7};
         Node start;
         start = convertToLinkedList(arr);
         printLinkedList(start);
@@ -30,7 +30,26 @@ public class Main {
         start = deleteValue(1 , start);
         printLinkedList(start);
         System.out.println();
+        start = reverseLinkedList(start);
+        printLinkedList(start);
     }
+
+    public static Node reverseLinkedList(Node start){
+        Node temp_start = null;
+        while(start != null){
+            if(temp_start == null){
+                Node node = new Node(start.value);
+                temp_start = node;
+            }else{
+                temp_start = addToStart(start.value, temp_start);
+            }
+
+            start = start.next;
+
+        }
+        return temp_start;
+    }
+
 
     public static Node deleteValue(int val,Node start){
         Node temp = start;
