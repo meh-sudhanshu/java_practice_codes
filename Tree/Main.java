@@ -9,10 +9,10 @@ public class Main {
 
     public static void main(String[] args) {
         Node root = new Node(1);
-        addNode(2, root, 'L','L');
-        addNode(3, root, 'R','R');
-        addNode(6, root, 'L','L');
-        addNode(7, root, 'L','R');
+        addNodeToLeaf(2, root, 'L','L');
+        addNodeToLeaf(3, root, 'R','R');
+        addNodeToLeaf(6, root, 'L','L');
+        addNodeToLeaf(7, root, 'L','R');
         inOrder(root);
         // System.out.println();
         // inOrder(root);
@@ -46,7 +46,7 @@ public class Main {
         }
     }
 
-    public static void addNode(int value,Node root,char dir1 , char dir2){
+    public static void addNodeToLeaf(int value,Node root,char dir1 , char dir2){
 
         Node temp = root;
         if(dir1 == 'L'){
