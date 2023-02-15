@@ -27,21 +27,36 @@ class Main{
         //     e.printStackTrace();
         // }
 
-        try{
-            File myObj = new File("test.txt");
-            myObj.createNewFile();
-            Scanner sc = new Scanner(myObj);
-            while(sc.hasNextLine()){
-                String line = sc.nextLine();
-                System.out.println(line);
-            }
-            sc.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        // try{
+        //     File myObj = new File("test.txt");
+        //     myObj.createNewFile();
+        //     Scanner sc = new Scanner(myObj);
+        //     while(sc.hasNextLine()){
+        //         String line = sc.nextLine();
+        //         System.out.println(line);
+        //     }
+        //     sc.close();
+        // }catch(Exception e){
+        //     e.printStackTrace();
+        // }
 
         // reading from a file
 
+        try{
+            
+            FileWriter writer = new FileWriter("test.txt");
+            writer.write("This is a test string");
+
+            File myObj = new File("test.txt");
+            myObj.createNewFile();
+
+            writer.write("this is a test string");
+            writer.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        // logic to read from test.txt
        
     }
 }
