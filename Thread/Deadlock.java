@@ -37,34 +37,34 @@
 
 
 class Test{
-    static String firstName = "suhanshu";
-    static String lastName = "kumar";
+    static final String firstName = "Rahul";
+    static final String lastName = "kumari";
     static class Thread1 extends Thread{
         public void run(){
             synchronized(firstName){
                 System.out.println("firstname is occupied by t1 "+firstName);
+                synchronized(lastName){
+                    System.out.println("lastname is occupied by t1 "+lastName);
+                }
             }
 
-            synchronized(lastName){
-                System.out.println("lastname is occupied by t1 "+lastName);
-            }
             }
         }
-    
     static class Thread2 extends Thread{
         public void run(){
             synchronized(lastName){
-                System.out.println("lastname is occupied by t1 "+lastName);
+                System.out.println("lastname is occupied by t2 "+lastName);
+                synchronized(firstName){
+                    System.out.println("firstname is occupied by t2 "+firstName);
+                }
             }
-            synchronized(firstName){
-                System.out.println("firstname is occupied by t1 "+firstName);
-            }
+
+            
         }
     }
     public static void main(String[] args) {
         Thread1 t1 = new Thread1();
         Thread2 t2 = new Thread2();
-
         t1.start();
         t2.start();
     }
