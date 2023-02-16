@@ -9,6 +9,12 @@ public class Main {
         printQueue(queue);
         pop(queue);
         printQueue(queue);
+        printSize(queue);
+    }
+
+
+    public static void printSize(ArrayList<Integer> queue){
+        System.out.println("The current size of queue is "+queue.size());
     }
 
     public static void pop(ArrayList<Integer> queue){
@@ -23,9 +29,11 @@ public class Main {
     public static int top(ArrayList<Integer> queue){
         return queue.get(0);
     }
+
     public static void push(int value,ArrayList<Integer> queue){
         queue.add(value);
     }
+
     public static void printQueue(ArrayList<Integer> queue){
         for(int e : queue){
             System.out.print(e+" ");
