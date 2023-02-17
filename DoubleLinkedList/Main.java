@@ -1,7 +1,3 @@
-import Main;
-import Main.Node;
-package DoubleLinkedList;
-
 public class Main {
     static class Node{
         Node prev, next;
@@ -19,6 +15,20 @@ public class Main {
         addToEnd(start, 5);
         start = addToStart(start, -1);
         printList(start);
+        start = deleteFromStart(start);
+        printList(start);
+    }
+
+
+    public static Node deleteFromStart(Node start){
+        if(start == null){
+            System.out.println("nothing to delete");
+        }else{
+            start = start.next;
+            start.prev = null;
+        }
+
+        return start;
     }
 
     public static Node addToStart(Node start , int val){
