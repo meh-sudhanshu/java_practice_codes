@@ -17,8 +17,46 @@ public class Main {
         printList(start);
         start = deleteFromStart(start);
         printList(start);
+        start = deleteFromEnd(start);
+        printList(start);
+        start = addAfter(3, 5, start);
+        printList(start);
     }
 
+
+    public static Node addAfter(int val1 , int val2 , Node start){
+        Node temp  = start;
+
+        while(temp.val != val1){
+            temp = temp.next;
+        }
+        Node temp2 = temp.next;
+        temp.next = new Node(val2);
+        temp.next.next = temp2;
+
+
+        return start;
+    }
+
+
+    public static  Node deleteFromEnd(Node start){
+        Node temp = start;
+        if(start == null){
+            System.out.println("nothing to delete");
+            return start;
+        }else if(temp.next == null){
+            temp = null;
+            return temp;
+        }
+        else
+        {
+            while(temp.next.next !=null){
+                temp = temp.next;
+            }
+            temp.next = null;
+        }
+        return start;
+    }
 
     public static Node deleteFromStart(Node start){
         if(start == null){
