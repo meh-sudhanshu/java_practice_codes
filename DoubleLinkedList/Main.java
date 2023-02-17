@@ -21,8 +21,23 @@ public class Main {
         printList(start);
         start = addAfter(3, 5, start);
         printList(start);
+        start = deleteAfter(3, start);
+        printList(start);
     }
 
+    public static Node deleteAfter(int val1,Node start){
+        // implement to delete a node just after val1
+        Node temp = start;
+        while(temp.val != val1){
+            temp = temp.next;
+        }
+
+        temp.next = temp.next.next;
+
+
+        return start;
+
+    }
 
     public static Node addAfter(int val1 , int val2 , Node start){
         Node temp  = start;
