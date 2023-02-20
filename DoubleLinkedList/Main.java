@@ -21,7 +21,8 @@ public class Main {
         printList(start);
         start = addAfter(3, 5, start);
         printList(start);
-        start = deleteAfter(3, start);
+        start = deleteAfter(3
+        , start);
         printList(start);
     }
 
