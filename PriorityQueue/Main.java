@@ -9,7 +9,7 @@ public class Main {
         public int compare(Integer o1, Integer o2) {
             int val1 = o1;
             int val2 = o2;
-            
+
             if(val2 >= val1) return 1;
             return -1;
 
@@ -56,3 +56,9 @@ public class Main {
         System.out.println();
     }
 }
+
+//  implement a comparator which will return multiple of 2 while performing
+// poll() operation
+
+
+//  2, 5, 6,3, 7, 8, 10
