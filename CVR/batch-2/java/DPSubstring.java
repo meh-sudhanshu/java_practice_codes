@@ -7,8 +7,7 @@ class DPSubstring{
         int tempi = i;
         int tempj = j;
         while(j < n){
-            while(
-                 < n){
+            while(tempj< n){
                 if(tempi == tempj){
                     dp[tempi][tempj] = 1;
                 }else if(Math.abs(tempj-tempi) == 1){
