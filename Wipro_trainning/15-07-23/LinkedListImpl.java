@@ -1,5 +1,3 @@
-import java.util.Stack;
-
 public class LinkedListImpl {
     static class Node{
         int value;
