@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Stack;
 
 class LinkedList{
@@ -12,6 +13,21 @@ class LinkedList{
     public static void main(String[] args) {
         int[] arr = {1,3,2,5,16,-30};
         Node start = createList(arr);
+        int num = 325;
+        HashMap<Integer,Integer> map = new HashMap<>();
+        while(num !=0){
+            map.put(num%10,1);
+            num = num/10;
+        }
+        Node temp1 = start;
+        int counter = 0;
+        while(temp1 != null){
+            if(map.getOrDefault(temp1.val, 0) == 1){
+                counter++;
+            }
+            temp1 = temp1.next;
+        }
+        System.out.println(counter+" count of digits");
         int n = 2;
         ArrayList<Integer> al = new ArrayList<>();
         Node temp = start;
