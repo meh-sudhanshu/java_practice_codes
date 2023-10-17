@@ -20,7 +20,8 @@ class Graph{
         }
         graph = buildGraph(numberOfVertices);
         //System.out.println(hasPath(graph, 0, 6, visited));
-        printAllPaths(graph, 0, 7, visited,0+"");
+        //printAllPaths(graph, 0, 7, visited,0+"");
+        getConnectedComponents(graph, numberOfVertices);
     }
     public static ArrayList<Edge>[] buildGraph(int numberOfVertices){
 
@@ -88,6 +89,30 @@ class Graph{
         }
         visited[src] = 0;
     }
+
+    public static void getConnectedComponents(ArrayList<Edge>[] graph, int numberOfVertices){
+        ArrayList<String> components = new ArrayList<>();
+        boolean[] visited = new boolean[numberOfVertices];
+        for(int i=0;i<numberOfVertices;i++){
+            if(visited[i]==false){
+                StringBuilder csf = new StringBuilder();
+                getComponent(graph,i,visited,csf);
+                components.add(csf.toString());
+            }
+        }
+        System.out.println(components);
+    }
+    private static void getComponent(ArrayList<Edge>[] graph, int src, boolean[] visited, StringBuilder csf) {
+        visited[src] = true;
+        csf.append(src);
+        for(Edge edge : graph[src]){
+            if(visited[edge.des] == false){
+                getComponent(graph, edge.des, visited, csf);
+            }
+        }
+    }
+
+
 }
 
 
