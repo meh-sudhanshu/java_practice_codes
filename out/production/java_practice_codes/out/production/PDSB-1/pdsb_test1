@@ -1,0 +1,73 @@
+1. write a java program to reverse a number
+    example: input = 4653, output = 3564
+
+    note: you need to reverse the number, 
+    just printing the reverse will not work
+
+2. write a java program to create a single linked list filled with
+    10 random values, and then create a double linked list with the 
+    same 10 random values.
+
+    note: the value in the lists should be random
+
+
+3. write a java program to print first 100 fibonaci number.
+
+
+4. find output of following program
+
+    class Test{
+        public static void main(String[] args){
+            int value = 0;
+            for(int i=1;i<=10;i++){
+                value = value + i++;
+            }
+            System.out.println(value);
+        }
+    }
+
+
+
+5. find the output of following program
+
+    class Test{
+        public static void main(String[] args){
+            int i = 0, j = 1000;
+            while(i < j){
+                i = i+j;
+                j = j/10;
+                i = i+1;
+            }
+            System.out.println(i+j);
+        }
+    }
+
+6. Given an integer array of even length, sort first half of this array
+
+    input = [-54,8,-22,2,4,9,2,0,-34,78,98,35]
+
+    output = [-54,-22,4,8,9,2,0-34,78,98,35]
+
+7. given an integer array and a value target , 
+
+    print true if there exists a triplet in the array that
+    sums up to target else print false.
+
+    e.g: arr = [-3,2,4,52,-4,6,9] target = 52 output = true (52+4+(-4)=52)
+
+
+
+
+8. check if a given paranthesis is valid
+    A valid paranthesis is one in which for every opening bracket
+    we have a corresponding closing bracket.
+
+    ()() --> is valid, (((()))) --> is valid, ())--> is invalid
+
+    )()( --> is invalid
+
+
+
+
+
+
