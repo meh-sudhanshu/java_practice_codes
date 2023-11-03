@@ -25,7 +25,8 @@ public class Substring {
                     }
                 }
                 i++;
-                jFlag++;
+                jFlag++
+                ;
             }
             j++;
         }
