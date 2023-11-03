@@ -7,7 +7,6 @@ public class MergeArrays {
 
     
         while (i< arr1.length || j < arr2.length) {
-
             if(i >= arr1.length){
                 while (j < arr2.length) {
                     ans[k] = arr2[j];
