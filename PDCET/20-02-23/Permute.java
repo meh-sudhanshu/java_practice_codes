@@ -14,7 +14,7 @@ public class Permute {
         ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
         if(arr.size() == 1){
             ans.add(arr);
-            return ans;
+            return ans; 
         }
         for(int i=0;i<arr.size();i++){
             int fixedElement = arr.get(i);
