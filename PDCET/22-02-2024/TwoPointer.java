@@ -16,5 +16,6 @@ public class TwoPointer {
             if(arr[i]+arr[j] < target) i++;
         }
         return false;
+        
     }
 }
