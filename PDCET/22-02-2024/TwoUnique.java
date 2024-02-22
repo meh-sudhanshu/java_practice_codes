@@ -4,7 +4,7 @@ public class TwoUnique {
         int[] ans = getBothUniqueNumber(arr);
         System.out.println(ans[0]+" "+ans[1]);
     }
-
+      
     private static int[] getBothUniqueNumber(int[] arr) {
         int collectiveXor = 0;
         int[] ans = {0,0};
