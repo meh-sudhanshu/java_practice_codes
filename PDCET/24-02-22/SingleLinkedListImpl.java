@@ -10,13 +10,15 @@ class SingleLinkedListImpl{
 
     }
     public static void main(String[] args) {
-        int[] arr = {89,-23,45,1,6,45,90};
+        int[] arr = {89,-23,45,1,6,45,90,7};
         Node start = createList(arr);
         printList(start);
         System.out.println();
         start = reverseList(start);
         printList(start);
         System.out.println();
+        float median = getMedian(start);
+        System.out.println((int)median+" meadian");
     }
     private static Node createList(int[] arr) {
         Node start = null;
@@ -55,4 +57,42 @@ class SingleLinkedListImpl{
 
         return start;
     }
+    public static float getMedian(Node start){
+        int length = getLength(start);
+        int ans = 0;
+       
+        if(length %2 == 1){
+            for(int i=1;i<=length/2;i++){
+                start = start.next;
+            }
+            return start.data;
+        }else{
+            for(int i=1;i<=length/2-1;i++){
+                start = start.next;
+            }
+            return (start.data + start.next.data)/2;
+        }
+    }
+
+
+
+
+
+    public static int getLength(Node start){
+        int ans = 0;
+        while (start != null) {
+            start = start.next;
+            ans+=1;
+        }
+        return ans;
+    }
 }
+
+
+
+// ans = 1
+// ans = ans+1
+// ans+=1
+// ans++
+
+// 1,2,5,8,4,9,13,15,67,34
