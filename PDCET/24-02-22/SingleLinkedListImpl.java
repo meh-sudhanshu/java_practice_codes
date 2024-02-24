@@ -23,7 +23,7 @@ class SingleLinkedListImpl{
         // System.out.println((int)median+" meadian");
         printList(start);
         System.out.println();
-        start = deleteAllOccurence(start, 87);
+        start = deleteAllOccurence(start, 90);
         printList(start);
     }
     private static Node createList(int[] arr) {
@@ -99,17 +99,21 @@ class SingleLinkedListImpl{
             if(temp.data != value) q.add(temp.data);
             temp = temp.next;
         }
-        System.out.println(q.toString()+" queue");
+        //System.out.println(q.toString()+" queue");
         temp = start;
         while (q.size() > 0) {
             int v = q.poll();
             temp.data = v;
-            temp= temp.next; 
+            if(q.size() != 0){
+                temp= temp.next; 
+            }
         }
+        
         temp.next = null;
-        System.out.println("list");
-        printList(start);
-        System.out.println();
+        //System.out.println(temp.data+" data");
+        //System.out.println("list");
+        //printList(start);
+        //System.out.println();
         return start;
     }
 }
