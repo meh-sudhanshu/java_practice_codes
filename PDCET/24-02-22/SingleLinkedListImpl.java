@@ -12,7 +12,7 @@ class SingleLinkedListImpl{
 
     }
     public static void main(String[] args) {
-        int[] arr = {87,87,87,89,-23,87,87,45,90,1,6,45,87,87,87,90,7,90,87,89,87,90,87,87};
+        int[] arr = {12,45,67,34,98,98,67,69,56,65};
         Node start = createList(arr);
         // printList(start);
         // System.out.println();
@@ -21,11 +21,42 @@ class SingleLinkedListImpl{
         // System.out.println();
         // float median = getMedian(start);
         // System.out.println((int)median+" meadian");
+        // printList(start);
+        // System.out.println();
+        // start = deleteAllOccurence(start, 90);
+        // printList(start);
+
         printList(start);
         System.out.println();
-        start = deleteAllOccurence(start, 90);
+        start = reverseHalfList(start);
         printList(start);
     }
+    private static Node reverseHalfList(Node start){
+        Stack<Integer> st1 = new Stack<>();
+        Stack<Integer> st2 = new Stack<>();
+        Node temp = start;
+        int n = getLength(start);
+        for(int i=1;i<=n;i++){
+            if(i <= n/2){
+                st1.push(temp.data);
+            }else{
+                st2.push(temp.data);
+            }
+            temp = temp.next;
+        }
+        temp = start;
+        while (temp != null) {
+            if(st1.size() > 0){
+                temp.data = st1.pop();
+            }else temp.data = st2.pop();
+
+            temp = temp.next;
+        }
+        return start;
+    }
+
+
+
     private static Node createList(int[] arr) {
         Node start = null;
         Node temp = null;
@@ -104,9 +135,7 @@ class SingleLinkedListImpl{
         while (q.size() > 0) {
             int v = q.poll();
             temp.data = v;
-            if(q.size() != 0){
-                temp= temp.next; 
-            }
+            
         }
         
         temp.next = null;
