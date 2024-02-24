@@ -26,10 +26,27 @@ class SingleLinkedListImpl{
         // start = deleteAllOccurence(start, 90);
         // printList(start);
 
+        // printList(start);
+
+        // System.out.println();
+        // start = reverseHalfList(start);
+        // printList(start);
+        start = addBeforeAndAfter(start,34);
         printList(start);
-        System.out.println();
-        start = reverseHalfList(start);
-        printList(start);
+    }
+    private  static Node addBeforeAndAfter(Node start, int value){
+        Node temp = start;
+        while (temp.next.data != value) {
+            temp = temp.next;
+        }
+        Node newNode = new Node(value);
+        newNode.next = temp.next;
+        temp.next = newNode;
+        temp = temp.next.next;
+        Node newNode2 = new Node(value);
+        newNode2.next = temp.next;
+        temp.next = newNode2;
+        return start;
     }
     private static Node reverseHalfList(Node start){
         Stack<Integer> st1 = new Stack<>();
