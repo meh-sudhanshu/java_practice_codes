@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class SingleLinkedListImpl{
     static class Node{
         int data;
@@ -11,6 +13,10 @@ class SingleLinkedListImpl{
         int[] arr = {89,-23,45,1,6,45,90};
         Node start = createList(arr);
         printList(start);
+        System.out.println();
+        start = reverseList(start);
+        printList(start);
+        System.out.println();
     }
     private static Node createList(int[] arr) {
         Node start = null;
@@ -33,5 +39,20 @@ class SingleLinkedListImpl{
             System.out.print(start.data+" ");
             start = start.next;
         }
+    }
+    public static Node reverseList(Node start){
+        Node temp = start;
+        Stack<Integer> st = new Stack<>();
+        while (temp != null) {
+            st.push(temp.data);
+            temp = temp.next;
+        }
+        temp = start;
+        while (temp != null) {
+            temp.data = st.pop();
+            temp = temp.next;
+        }
+
+        return start;
     }
 }
