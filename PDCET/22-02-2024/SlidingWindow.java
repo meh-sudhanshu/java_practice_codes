@@ -1,4 +1,4 @@
-public class KadanesAlgo {
+public class SlidingWindow {
     public static void main(String[] args) {
         int[] arr = {3,-1,2,7,9,-5,4,12};
         int k = 3;
