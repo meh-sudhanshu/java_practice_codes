@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 class SingleLinkedListImpl{
@@ -10,15 +12,19 @@ class SingleLinkedListImpl{
 
     }
     public static void main(String[] args) {
-        int[] arr = {89,-23,45,1,6,45,90,7};
+        int[] arr = {87,87,87,89,-23,87,87,45,90,1,6,45,87,87,87,90,7,90,87,89,87,90,87,87};
         Node start = createList(arr);
+        // printList(start);
+        // System.out.println();
+        // start = reverseList(start);
+        // printList(start);
+        // System.out.println();
+        // float median = getMedian(start);
+        // System.out.println((int)median+" meadian");
         printList(start);
         System.out.println();
-        start = reverseList(start);
+        start = deleteAllOccurence(start, 87);
         printList(start);
-        System.out.println();
-        float median = getMedian(start);
-        System.out.println((int)median+" meadian");
     }
     private static Node createList(int[] arr) {
         Node start = null;
@@ -85,6 +91,26 @@ class SingleLinkedListImpl{
             ans+=1;
         }
         return ans;
+    }
+    public static Node deleteAllOccurence(Node start, int value){
+        Queue<Integer> q = new LinkedList<>();
+        Node temp = start;
+        while (temp != null) {
+            if(temp.data != value) q.add(temp.data);
+            temp = temp.next;
+        }
+        System.out.println(q.toString()+" queue");
+        temp = start;
+        while (q.size() > 0) {
+            int v = q.poll();
+            temp.data = v;
+            temp= temp.next; 
+        }
+        temp.next = null;
+        System.out.println("list");
+        printList(start);
+        System.out.println();
+        return start;
     }
 }
 
