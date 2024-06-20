@@ -11,6 +11,7 @@ class DistinctSlidingWindow{
         int i=0, j = ws-1;
         int ans = Integer.MIN_VALUE;
         int previousSum = 0;
+        boolean isAnsPossible = false;
         while(j < arr.length){
             int currentSum = 0;
             if(i == 0){
@@ -39,10 +40,11 @@ class DistinctSlidingWindow{
             i+=1;
             j+=1;
             if(map.size() == ws){
+                isAnsPossible = true;
                 ans = Math.max(ans,currentSum);
             }
         }
-
+        if(isAnsPossible == false ) return -1;
         return ans;
     }
 }
