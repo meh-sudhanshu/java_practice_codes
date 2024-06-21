@@ -1,3 +1,4 @@
+import java.util.*;
 class LinkedListImpl{
 
     static class Node{
@@ -9,10 +10,27 @@ class LinkedListImpl{
     }
 
     public static void main(String[] args){
-        int[] arr = {1,4,2,7,8,4};
+        int[] arr = {2,3,5,6,7,8,8,7,6,5,3,2};
         Node start = generateList(arr);
         printList(start);
+        System.out.print(isPalindrome(start));
     }
+
+    public static boolean isPalindrome(Node start){
+        Stack<Integer> st = new Stack<>();
+        Node temp = start;
+        while(temp != null){
+            st.push(temp.data);
+            temp = temp.next;
+        }
+        temp = start;
+        while(temp != null){
+            if(temp.data != st.pop()) return false;
+            temp = temp.next;
+        }
+        return true;
+    }
+
     public static Node generateList(int[] arr){
         Node start = null;
         Node temp = null;
