@@ -11,14 +11,38 @@ class SingleLinkedListProblems{
 
     public static void main(String[] args){
         int[] arr1 = {2,3,5,6,7,8,8,7,6,5,3,2};
-        int[] arr2 = {2,3,4,6,9,8,6,7,6,5,3,2};
-        Node list1 = generateList(arr1);
-        Node list2 = generateList(arr2);
-        int intersectionPoint = getIntersectionPoint(list1,list2);
-        System.out.println(intersectionPoint);
+        //int[] arr2 = {2,3,4,6,9,8,6,7,6,5,3,2};
+        Node start = generateList(arr1);
+        int i=3, j=8;
+        start = reverseListInTheRange(start,i,j);
+        printList(start);
+        // Node list2 = generateList(arr2);
+        // int intersectionPoint = getIntersectionPoint(list1,list2);
+        // System.out.println(intersectionPoint);
         // Node start = generateList(arr);
         // printList(start);
         // System.out.print(isPalindrome(start));
+    }
+
+    public static Node reverseListInTheRange(Node start, int i, int j){
+        int count = (j-i)+1;
+        Node temp = start;
+        Stack<Integer> st = new Stack<>();
+        for(int k=0;k<i-1;k++){
+            temp = temp.next;
+        }
+        Node t = temp;
+        while(count != 0){
+            st.push(temp.data);
+            temp = temp.next;
+            count-=1;
+        }
+        while(st.size() > 0){
+            t.data = st.pop();
+            t = t.next;
+        }
+
+        return start;
     }
 
 
