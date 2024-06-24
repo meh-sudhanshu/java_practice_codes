@@ -99,7 +99,7 @@ class SingleLinkedListProblems{
 
     public static void main(String[] args){
         char[] arr1 = {'m','a','l','a','t','a','l','a','t','m'};
-        char[] arr2 = {'m','p','l','t','y','a','l','a','t','m'};
+        //char[] arr2 = {'m','p','l','t','y','a','l','a','t','m'};
         // Node start = createList(arr);
         // System.out.println("list at the begining");
         // printList(start);
@@ -113,9 +113,30 @@ class SingleLinkedListProblems{
         // start = reverseList(start);
         // printList(start);
 
-        Node list1 = createList(arr1);
-        Node list2 = createList(arr2);
-        char ch = getIntersectionpoint(list1,list2);
-        System.out.println("intersection point is "+ ch);
+        Node start = createList(arr1);
+        int i=3, j= 8;
+        start = reverseListInRange(start,i,j);
+        printList(start);
+        // Node list2 = createList(arr2);
+        // char ch = getIntersectionpoint(list1,list2);
+        // System.out.println("intersection point is "+ ch);
+    }
+
+    public static Node reverseListInRange(Node start, int i, int j){
+        Stack<Character> st = new Stack<>();
+        int count = (j-i)+1;
+        Node temp = start;
+        Node t1 = temp;
+        for(int k=1;k<i;k++) temp = temp.next;
+        for(int k=0;k<count;k++){
+            st.push(temp.data);
+            temp = temp.next;
+        }
+        while(st.size() > 0){
+            t1.data = st.pop();
+            t1 = t1.next;
+        }
+        return start;
+
     }
 }
