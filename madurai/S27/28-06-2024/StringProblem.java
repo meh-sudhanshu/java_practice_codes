@@ -11,6 +11,8 @@ class StringProblem {
         int ri=0,ci=0;
         int totalCount = 0;
         int lpssi = 0, lpsei = 0;
+        int spssi = 0, spsei = 0;
+        boolean isSpsE = false;
         while(ci < arr.length){
             int cFlag = ci;
             while (cFlag < arr.length){
@@ -25,6 +27,11 @@ class StringProblem {
                             lpssi = ri;
                             lpsei = cFlag;
                         }
+                       if(isSpsE == false){
+                        isSpsE =true;
+                        spssi = ri;
+                        spsei = cFlag;
+                       }
                     }
                 }else{
                     if(str.charAt(ri) == str.charAt(cFlag)){
@@ -35,6 +42,11 @@ class StringProblem {
                                 lpssi = ri;
                                 lpsei = cFlag;
                             }
+                            if(isSpsE == false){
+                                isSpsE =true;
+                                spssi = ri;
+                                spsei = cFlag;
+                               }
                         }
                     }
                 }
@@ -47,6 +59,7 @@ class StringProblem {
         }
         System.out.println(totalCount);
         System.out.println(str.substring(lpssi, lpsei+1));
+        System.out.println(str.substring(spssi, spsei+1));
 
     }
 }
