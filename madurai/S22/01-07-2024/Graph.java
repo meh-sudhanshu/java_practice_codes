@@ -1,15 +1,36 @@
 class Graph{
     public static void main(String[] args) {
-        int[][] edges = {{0,1},{0,3},{1,2},{2,3},{4,5},{4,7},{5,6},{6,7}};
+        int[][] edges = {{0,1},{0,3},{1,2},{1,4},{2,3},{4,5},{4,7},{5,6},{6,7},{3,7}};
         int n = 8;
         int[][] graph = buildGraph(edges,n);
         //printGraph(graph);
         int src = 3;
         int des = 7;
         int[] visited = new int[n];
-        boolean ans = hasPath(graph,src,des,visited);
-        System.out.println(ans);
+        visited[src] = 1;
+        printAllPath(graph,src,des,visited,src+"");
+        //boolean ans = hasPath(graph,src,des,visited);
+        //System.out.println(ans);
 
+    }
+
+
+
+
+    private static void printAllPath(int[][] graph, int src, int des, 
+                                        int[] visited, String psf) {
+        if(src == des){
+            System.out.println(psf);
+            return;
+        }
+        int[] nbrs = graph[src];
+        for(int i=0;i<nbrs.length;i++){
+            if(graph[src][i] == 1 && visited[i]==0){
+                visited[i] = 1;
+                printAllPath(graph,i, des, visited, psf+"->"+i);
+                visited[i] = 0;
+            }
+        }
     }
 
 
