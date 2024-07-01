@@ -1,4 +1,5 @@
 class Graph{
+    static String largestPath = "", smallestPath = "";
     public static void main(String[] args) {
         int[][] edges = {{0,1},{0,3},{1,2},{1,4},{2,3},{4,5},{4,7},{5,6},{6,7},{3,7}};
         int n = 8;
@@ -9,6 +10,8 @@ class Graph{
         int[] visited = new int[n];
         visited[src] = 1;
         printAllPath(graph,src,des,visited,src+"");
+        System.out.println(smallestPath+" smallest path");
+        System.out.println(largestPath+" largest path");
         //boolean ans = hasPath(graph,src,des,visited);
         //System.out.println(ans);
 
@@ -21,6 +24,17 @@ class Graph{
                                         int[] visited, String psf) {
         if(src == des){
             System.out.println(psf);
+            if(largestPath.equals("") && smallestPath.equals("")){
+                largestPath = psf;
+                smallestPath = psf;
+            }else{
+                if(psf.length() < smallestPath.length()){
+                    smallestPath = psf;
+                }
+                if(psf.length() > largestPath.length()){
+                    largestPath = psf;
+                }
+            }
             return;
         }
         int[] nbrs = graph[src];
