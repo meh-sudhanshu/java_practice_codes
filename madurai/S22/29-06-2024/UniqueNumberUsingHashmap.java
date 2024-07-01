@@ -6,7 +6,6 @@ public class UniqueNumberUsingHashmap {
         int ans = getUniqueNumber(arr);
         System.out.println(ans);
     }
-
     private static int getUniqueNumber(int[] arr) {
         HashMap<Integer, Integer> map = new HashMap<>();
         for (int e : arr) {
