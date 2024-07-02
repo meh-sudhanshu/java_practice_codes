@@ -15,8 +15,11 @@ class Graph{
         ArrayList<String> allPaths = new ArrayList<>();
         int[] visited = new int[n];
         visited[src] = 1;
-        allPaths = getAllPaths(graph,src,des,pathSorFar,allPaths,visited);
+        int cost = 0;
+        allPaths = getAllPaths(graph,src,des,pathSorFar,allPaths,visited,cost);
         System.out.println(allPaths);
+        int minCost = getMinimumCost(allPaths);
+        System.out.println(minCost);
         // int minCost = getMinimumCost(graph,src,des);
         // System.out.println(minCost);
     }
@@ -25,10 +28,26 @@ class Graph{
         
     // }
 
+    private static int getMinimumCost(ArrayList<String> allPaths) {
+        int minCost = Integer.MAX_VALUE;
+        for(String path: allPaths){
+            for(int i=0;i<path.length();i++){
+                if(path.charAt(i) == '*'){
+                    int costIndex = i+1;
+                    int cost = Integer.parseInt(path.substring(costIndex));
+                    if(cost < minCost){
+                        minCost = cost;
+                    }
+                }
+            }
+        }
+        return minCost;
+    }
+
     private static ArrayList<String> getAllPaths(int[][] graph, int src, 
-                    int des,String psf,ArrayList<String> allPaths,int[] visited) {
+                    int des,String psf,ArrayList<String> allPaths,int[] visited,int cost) {
         if(des == src){
-            allPaths.add(psf);
+            allPaths.add(psf+"*"+cost);
             return null;
         }
         int[] nbrs = graph[src];
@@ -36,7 +55,7 @@ class Graph{
             if(graph[src][i] != 0){
                 if(visited[i] == 0){
                     visited[i] = 1;
-                    getAllPaths(graph, i, des, psf+"->"+i, allPaths, visited);
+                    getAllPaths(graph, i, des, psf+"->"+i, allPaths, visited,cost+graph[src][i]);
                     visited[i] = 0;
                 }
             }
