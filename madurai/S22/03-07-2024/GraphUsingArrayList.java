@@ -14,7 +14,50 @@ class GraphUsingArrayList{
                             ,{4,5,5},{6,5,6},{6,4,7}};
         int n = 7;
         ArrayList<Edge>[] graph =    buildGraph(edges, n);
-        printGraph(graph);                            
+        int src = 0, des = 6;
+        int[] visited = new int[n];
+        visited[src] = 1;
+        //boolean ans = hasPath(graph,src,des, visited);
+        //System.out.println(ans);
+        ArrayList<String>   allPath = new ArrayList<>();
+        allPath = getAllPath(graph,src,des,visited,""+src,0,allPath);
+        //printGraph(graph);               
+        System.out.println(allPath);             
+    }
+    private static ArrayList<String> getAllPath(ArrayList<GraphUsingArrayList.Edge>[] graph, int src, int des,
+            int[] visited, String pathSoFar, int costSoFar,ArrayList<String> allPath) {
+                if(src == des){
+                    allPath.add(pathSoFar+"*"+costSoFar);
+                    return null;
+                }
+                ArrayList<Edge> nbrs = graph[src];
+                for(int i=0;i<nbrs.size();i++){
+                    int nbr = nbrs.get(i).des;
+                    int cost = nbrs.get(i).wt;
+                   if(visited[nbr] == 0){
+                        visited[nbr] = 1;
+                        getAllPath(graph, nbr, des, visited, pathSoFar+"->"+nbr, costSoFar+cost,allPath);
+                        visited[nbr] = 0;
+                   }
+                }
+
+            return allPath;
+    }
+    private static boolean hasPath(ArrayList<GraphUsingArrayList.Edge>[] graph, 
+                                    int src, int des, int[] visited) {
+        if(src == des){
+            return true;
+        }
+        ArrayList<Edge> nbrs = graph[src];
+        for(int i=0;i<nbrs.size();i++){
+            int nbr = nbrs.get(i).des;
+           if(visited[nbr] == 0){
+                visited[nbr] = 1;
+                boolean ans = hasPath(graph, nbr, des,visited);
+                if(ans == true) return true;
+           }
+        }
+        return false;
     }
     private static void printGraph(ArrayList<GraphUsingArrayList.Edge>[] graph) {
         for(int i=0;i<graph.length;i++){
