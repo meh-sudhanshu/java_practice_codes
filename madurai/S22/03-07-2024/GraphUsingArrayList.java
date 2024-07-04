@@ -10,19 +10,30 @@ class GraphUsingArrayList{
         }
     }
     public static void main(String[] args) {
-        int[][] edges ={{0,1,8},{2,0,-1},{3,2,3},{1,3,2},{1,4,9}
-                            ,{4,5,5},{6,5,6},{6,4,7}};
+        int[][] edges ={{0,1,8},{3,2,3}
+                            ,{6,5,6},{6,4,7}};
         int n = 7;
         ArrayList<Edge>[] graph =    buildGraph(edges, n);
         int src = 0, des = 6;
-        int[] visited = new int[n];
-        visited[src] = 1;
-        //boolean ans = hasPath(graph,src,des, visited);
+        //int[] visited = new int[n];
+        //boolean ans = hasPath(graph,src,des, visited,true);
         //System.out.println(ans);
-        ArrayList<String>   allPath = new ArrayList<>();
-        allPath = getAllPath(graph,src,des,visited,""+src,0,allPath);
+        //ArrayList<String>   allPath = new ArrayList<>();
+        //allPath = getAllPath(graph,src,des,visited,""+src,0,allPath);
         //printGraph(graph);               
-        System.out.println(allPath);             
+        //System.out.println(allPath);
+        
+        boolean ans = isCyclic(graph,n);
+        System.out.println(ans);
+
+    }
+    private static boolean isCyclic(ArrayList<Edge>[] graph,int n) {
+        int[] visited = new int[n];
+        for(int i=0;i<n;i++){
+            boolean ans = hasPath(graph, i, i, visited,false);
+            if(ans == true) return true;
+        }
+        return false;
     }
     private static ArrayList<String> getAllPath(ArrayList<GraphUsingArrayList.Edge>[] graph, int src, int des,
             int[] visited, String pathSoFar, int costSoFar,ArrayList<String> allPath) {
@@ -43,9 +54,9 @@ class GraphUsingArrayList{
 
             return allPath;
     }
-    private static boolean hasPath(ArrayList<GraphUsingArrayList.Edge>[] graph, 
-                                    int src, int des, int[] visited) {
-        if(src == des){
+    private static boolean hasPath(ArrayList<Edge>[] graph, 
+                                    int src, int des, int[] visited,boolean flag) {
+        if(flag == true &&  src == des){
             return true;
         }
         ArrayList<Edge> nbrs = graph[src];
@@ -53,7 +64,7 @@ class GraphUsingArrayList{
             int nbr = nbrs.get(i).des;
            if(visited[nbr] == 0){
                 visited[nbr] = 1;
-                boolean ans = hasPath(graph, nbr, des,visited);
+                boolean ans = hasPath(graph, nbr, des,visited,true);
                 if(ans == true) return true;
            }
         }
