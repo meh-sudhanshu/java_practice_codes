@@ -1,3 +1,4 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 class Graph {
@@ -13,9 +14,19 @@ class Graph {
         }
     }
 
+    static class Pair {
+        int src;
+        String psf;
+        Pair(int src,String psf){
+            this.src = src;
+            this.psf = psf;
+        }
+        
+    }
+
     public static void main(String[] args) {
         int edges[][] = { { 0, 1, 2 },
-                { 2, 3, 4 }, { 4, 6, 7 }, { 4, 5, 8 }, { 6, 5, 9 } };
+                { 2, 3, 4 }, { 4, 6, 7 }, { 4, 5, 8 }, { 6, 5, 9 },{0,2,4},{1,3,6},{1,5,7} };
         int n = 7;
         ArrayList<Edge>[] graph = buildGraph(edges, n);
         // printGraph(graph);
@@ -24,31 +35,56 @@ class Graph {
         // visited[src] = 1;
         // boolean ans = hasPath(graph,src,des,visited);
         // System.out.println(ans);
-        int[] visited = new int[n];
-        ArrayList<String> allComponents = getAllComponents(graph, n,visited);
-        System.out.println(allComponents);
+        //getAllComponents(graph, n);
+        bfs(graph,n,0);
 
     }
 
-    private static ArrayList<String> getAllComponents(ArrayList<Edge>[] graph, int n,int[] visited) {
-        ArrayList<String> allComponents = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            if (visited[i] == 0) {
-                String component = getComponent(i, graph, visited,i+"");
-                allComponents.add(component);
+    private static void bfs(ArrayList<Graph.Edge>[] graph, int n,int src) {
+        ArrayDeque<Pair> queue = new ArrayDeque<>();
+        int[] visited = new int[n];
+        queue.add(new Pair(src, src+""));
+        while (queue.size() > 0) {
+            Pair removedPair = queue.poll();
+            if(visited[removedPair.src] == 1){
+                continue;
+            }
+            visited[removedPair.src]  = 1;
+            System.out.println(removedPair.src+"->"+removedPair.psf);
+            ArrayList<Edge> nbrs = graph[removedPair.src];
+            for(Edge edge : nbrs){
+                int nbr = edge.nbr;
+                if(visited[nbr] == 0){
+                    queue.add(new Pair(nbr,removedPair.psf+nbr));
+                }
             }
         }
-        return allComponents;
     }
 
-    private static String getComponent(int i, ArrayList<Graph.Edge>[] graph, int[] visited, String csf) {
+    private static void getAllComponents(ArrayList<Edge>[] graph, int n) {
+        ArrayList<String> allComponents = new ArrayList<>();
+        int[] visited = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (visited[i] == 0) {
+                StringBuilder csf = new StringBuilder();
+                getComponent(i, graph, visited,csf);
+                allComponents.add(csf.toString());
+            }
+        }
+        System.out.println(allComponents);
+    }
+
+    private static void getComponent(int i, ArrayList<Graph.Edge>[] graph, int[] visited, StringBuilder csf) {
+        csf.append(i);
+        visited[i]  = 1;
         ArrayList<Edge> nbrs = graph[i];
         for(int j=0;j<nbrs.size();j++){
             Edge currentNbr = nbrs.get(j);
-            visited[currentNbr.node] = 1;
-            getComponent(currentNbr.node, graph, visited, csf+currentNbr.node);
+            if(visited[currentNbr.node] == 0){
+                getComponent(currentNbr.nbr, graph, visited, csf);
+            }
         }
-        return csf; 
+         
     }
 
     private static boolean hasPath(ArrayList<Graph.Edge>[] graph, int src, int des, int[] visited) {
