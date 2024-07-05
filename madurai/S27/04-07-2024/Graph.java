@@ -35,16 +35,16 @@ class Graph {
         // visited[src] = 1;
         // boolean ans = hasPath(graph,src,des,visited);
         // System.out.println(ans);
-        //getAllComponents(graph, n);
+        getAllComponents(graph, n);
         //bfs(graph,n,0);
-        boolean ans = false;
-        for(int i=0;i<n;i++){
-            ans = isCyclic(graph,n,i);
-            if(ans == true){
-                break;
-            }
-        }
-        System.out.println(ans);
+        // boolean ans = false;
+        // for(int i=0;i<n;i++){
+        //     ans = isCyclic(graph,n,i);
+        //     if(ans == true){
+        //         break;
+        //     }
+        // }
+        // System.out.println(ans);
     }
 
     private static boolean isCyclic(ArrayList<Graph.Edge>[] graph, int n,int src) {
@@ -103,13 +103,14 @@ class Graph {
         System.out.println(allComponents);
     }
 
-    private static void getComponent(int i, ArrayList<Graph.Edge>[] graph, int[] visited, StringBuilder csf) {
+    private static void getComponent(int i, ArrayList<Graph.Edge>[] 
+                                        graph, int[] visited, StringBuilder csf) {
         csf.append(i);
         visited[i]  = 1;
         ArrayList<Edge> nbrs = graph[i];
         for(int j=0;j<nbrs.size();j++){
             Edge currentNbr = nbrs.get(j);
-            if(visited[currentNbr.node] == 0){
+            if(visited[currentNbr.nbr] == 0){
                 getComponent(currentNbr.nbr, graph, visited, csf);
             }
         }
