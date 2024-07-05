@@ -1,3 +1,4 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 class GraphUsingArrayList{
@@ -9,11 +10,21 @@ class GraphUsingArrayList{
             this.wt = wt;
         }
     }
+    static class Pair{
+        int src;
+        String psf;
+        Pair(int src, String psf){
+            this.src = src;
+            this.psf = psf;
+        }
+    }
     public static void main(String[] args) {
-        int[][] edges ={{0,1,8},{3,2,3},{0,2,3},{1,3,4}
+        int[][] edges ={{0,1,8},{3,2,3},{0,2,3},{1,3,4},{1,4,8}
         ,{6,5,6},{6,4,7}};
         int n = 7;
         ArrayList<Edge>[] graph =    buildGraph(edges, n);
+        bfs(graph,n,0);
+
         //boolean ans = isCyclic(graph,n);
         //int src = 0, des = 6;
         //int[] visited = new int[n];
@@ -59,6 +70,25 @@ class GraphUsingArrayList{
     //                     visited[nbr] = 0;
     //                }
     //             }
+
+    private static void bfs(ArrayList<GraphUsingArrayList.Edge>[] graph, int n, int src) {
+       ArrayDeque<Pair> queue = new ArrayDeque<>();
+       queue.add(new Pair(src, src+""));
+       int[] visited = new int[n];
+       while (queue.size() > 0) {
+            Pair removedPair = queue.poll();
+            visited[removedPair.src] = 1;
+            System.out.println(src+ "-->" + removedPair.psf);
+            ArrayList<Edge> nbrs = graph[removedPair.src];
+            for(Edge edge : nbrs){
+                int nbr = edge.des;
+                if(visited[nbr] == 1){
+                    continue;
+                }
+                queue.add(new Pair(nbr,removedPair.psf+"->"+nbr));
+            }
+       }
+    }
 
     //         return allPath;
     // }
