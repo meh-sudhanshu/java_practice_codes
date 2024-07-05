@@ -25,8 +25,8 @@ class Graph {
     }
 
     public static void main(String[] args) {
-        int edges[][] = { { 0, 1, 2 },
-                { 2, 3, 4 }, { 4, 6, 7 }, { 4, 5, 8 }, { 6, 5, 9 },{0,2,4},{1,3,6},{1,5,7} };
+        int edges[][] = { 
+                { 2, 3, 4 }, { 4, 5, 8 }, { 6, 5, 9 },{1,3,6}};
         int n = 7;
         ArrayList<Edge>[] graph = buildGraph(edges, n);
         // printGraph(graph);
@@ -36,8 +36,37 @@ class Graph {
         // boolean ans = hasPath(graph,src,des,visited);
         // System.out.println(ans);
         //getAllComponents(graph, n);
-        bfs(graph,n,0);
+        //bfs(graph,n,0);
+        boolean ans = false;
+        for(int i=0;i<n;i++){
+            ans = isCyclic(graph,n,i);
+            if(ans == true){
+                break;
+            }
+        }
+        System.out.println(ans);
+    }
 
+    private static boolean isCyclic(ArrayList<Graph.Edge>[] graph, int n,int src) {
+        ArrayDeque<Pair> queue = new ArrayDeque<>();
+        int[] visited = new int[n];
+        queue.add(new Pair(src, src+""));
+        while (queue.size() > 0) {
+            Pair removedPair = queue.poll();
+            if(visited[removedPair.src] == 1){
+                return true;
+            }
+            visited[removedPair.src]  = 1;
+            //System.out.println(removedPair.src+"->"+removedPair.psf);
+            ArrayList<Edge> nbrs = graph[removedPair.src];
+            for(Edge edge : nbrs){
+                int nbr = edge.nbr;
+                if(visited[nbr] == 0){
+                    queue.add(new Pair(nbr,removedPair.psf+nbr));
+                }
+            }
+        }
+        return false;
     }
 
     private static void bfs(ArrayList<Graph.Edge>[] graph, int n,int src) {
