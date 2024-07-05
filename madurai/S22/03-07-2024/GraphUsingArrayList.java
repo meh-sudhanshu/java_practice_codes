@@ -23,20 +23,16 @@ class GraphUsingArrayList {
     }
 
     public static void main(String[] args) {
-        int[][] edges = { { 0, 1, 8 }, { 3, 2, 3 }, { 0, 2, 3 }, { 1, 3, 4 }, { 1, 4, 8 }, { 6, 5, 6 }, { 6, 4, 7 } };
+        int[][] edges = { {1,2,5}, {0,1,10}, { 3, 2, 3 }, { 0, 2, 3 }, { 1, 3, 4 }, { 6, 5, 6 }, { 6, 4, 7 } };
         int n = 7;
         ArrayList<Edge>[] graph = buildGraph(edges, n);
         // bfs(graph,n,0);
-        int[] visited = new int[n];
         boolean ans = false;
         for (int i = 0; i < n; i++) {
-            if (visited[i] == 0) {
                 ans = isCyclic(graph, n, i);
-                if (ans == true) {
-                    ans = true;
+                if (ans == true){
                     break;
                 }
-            }
         }
 
         System.out.println(ans);
@@ -93,15 +89,18 @@ class GraphUsingArrayList {
         int[] visited = new int[n];
         while (queue.size() > 0) {
             Pair removedPair = queue.poll();
+            if(visited[removedPair.src] == 1){
+                return true;
+            }
             visited[removedPair.src] = 1;
             // System.out.println(src+ "-->" + removedPair.psf);
             ArrayList<Edge> nbrs = graph[removedPair.src];
             for (Edge edge : nbrs) {
                 int nbr = edge.des;
-                if (visited[nbr] == 1) {
-                    return true;
+                if(visited[nbr] == 0){
+                    queue.add(new Pair(nbr, removedPair.psf + "->" + nbr));
                 }
-                queue.add(new Pair(nbr, removedPair.psf + "->" + nbr));
+                
             }
         }
 
