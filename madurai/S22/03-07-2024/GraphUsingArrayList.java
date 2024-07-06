@@ -23,19 +23,24 @@ class GraphUsingArrayList {
     }
 
     public static void main(String[] args) {
-        int[][] edges = { {1,2,5}, {0,1,10}, { 3, 2, 3 }, { 0, 2, 3 }, { 1, 3, 4 }, { 6, 5, 6 }, { 6, 4, 7 } };
+        int[][] edges = { {1,2,5}, {0,1,10},
+        
+        { 3, 2, 3 }, { 0, 2, 3 }, { 1, 3, 4 }, { 6, 5, 6 }, { 6, 4, 7 } };
         int n = 7;
         ArrayList<Edge>[] graph = buildGraph(edges, n);
-        // bfs(graph,n,0);
-        boolean ans = false;
-        for (int i = 0; i < n; i++) {
-                ans = isCyclic(graph, n, i);
-                if (ans == true){
-                    break;
-                }
-        }
 
-        System.out.println(ans);
+        ArrayList<String> allComponents =   getAllComponents(graph,n);
+        System.out.println(allComponents);
+        // bfs(graph,n,0);
+        // boolean ans = false;
+        // for (int i = 0; i < n; i++) {
+        //         ans = isCyclic(graph, n, i);
+        //         if (ans == true){
+        //             break;
+        //         }
+        // }
+
+        // System.out.println(ans);
         // boolean ans = isCyclic(graph,n);
         // int src = 0, des = 6;
         // int[] visited = new int[n];
@@ -82,6 +87,33 @@ class GraphUsingArrayList {
     // visited[nbr] = 0;
     // }
     // }
+
+    private static ArrayList<String> getAllComponents(ArrayList<GraphUsingArrayList.Edge>[] graph, int n) {
+        int[] visited = new int[n];
+        ArrayList<String> allComponents = new ArrayList<>();
+        for(int i=0;i<n;i++){
+            if(visited[i] == 0){
+                StringBuilder component = new StringBuilder();
+                buildComponentInvolvingI(graph,i,visited,component);
+                allComponents.add(component.toString());
+            }
+        }
+
+        return allComponents;
+    }
+
+    private static void buildComponentInvolvingI(ArrayList<GraphUsingArrayList.Edge>[] graph, int i, int[] visited,
+            StringBuilder component) {
+            visited[i] = 1;
+            component.append(i);
+            ArrayList<Edge> nbrs = graph[i];
+            for(Edge edge : nbrs){
+                if(visited[edge.des] == 0){
+                    buildComponentInvolvingI(graph, edge.des, visited, component);
+                }
+            }
+                
+    }
 
     private static boolean isCyclic(ArrayList<GraphUsingArrayList.Edge>[] graph, int n, int src) {
         ArrayDeque<Pair> queue = new ArrayDeque<>();
