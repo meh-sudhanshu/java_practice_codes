@@ -20,6 +20,6 @@ public class Palindrome {
 
        String subStr = str.substring(1, n-1);
 
-       return isPalindrome(subStr);
+       return isPalindrome(subStr); 
     }
 }
