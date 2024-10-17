@@ -10,9 +10,7 @@ public class SlindingWindow {
         int ans = Integer.MIN_VALUE;
         int previousSum = 0;
         int i = 0, j = ws-1;
-
         while (j < arr.length) {
-
             int currentSum = 0;
             if (i == 0) {
                 for(int l = i;l<=j;l++) currentSum+=arr[l];
