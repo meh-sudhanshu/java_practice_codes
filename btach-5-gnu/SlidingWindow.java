@@ -1,6 +1,6 @@
 public class SlidingWindow {
     public static void main(String[] args) {
-        int[] arr = {5,9,-2,4,3,5,6,-45,46};
+        int[] arr = {5,9,-2,4,4,4,3,5,66,66,-45,46};
         int k = 3;
         int ans = getMaximumSubarraSum(arr,k);
             System.out.println(ans);
