@@ -6,21 +6,21 @@ class Dp{
         System.out.println(ans);
     }
     private static int fun(int n,int[] dp){
-
         if (dp[n] != 0) {
             return dp[n];
         }
-
-
-
         System.out.println("function with value "+n+" is called !!");
         if (n <= 2) {
             return n;
         }
         int ans1 = fun(n-2,dp);
-        dp[n-2] = ans1;
+        if (n-2 >=0) {
+            dp[n-2] = ans1;
+        }
         int ans2 = fun(n-4, dp);
-        dp[n-4] = ans2;
+        if (n-4 >=0) {
+            dp[n-4] = ans2;
+        }
         return ans1+ans2;
     }
 }
