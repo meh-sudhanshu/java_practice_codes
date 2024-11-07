@@ -9,6 +9,7 @@ public class SubSequesnce {
         print(arr,index,curr);
     }
     private static void print(int[] arr,int index, ArrayList<Integer> curr){
+        
         if(index == arr.length){
             System.out.println(curr);
             return;
