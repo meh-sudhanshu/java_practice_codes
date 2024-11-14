@@ -2,7 +2,7 @@ import java.util.HashMap;
 
 public class SubStrLength {
     public static void main(String[] args) {
-        String str = "malayalam";
+        String str = "aaaapoetryabcdssscg";
         int ans = findLengthOfSubstringWithAllDistinctElement(str);
         System.out.println(ans);
     }
@@ -23,7 +23,7 @@ public class SubStrLength {
                     if (currLength > ans) {
                         ans = currLength;
                     }
-                    myMap.put(ch,currIndex+1);
+                    myMap.put(ch,j);
                     i = currIndex+1;
                 }
                
