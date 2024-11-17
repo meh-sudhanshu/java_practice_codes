@@ -1,23 +1,47 @@
 import java.util.Arrays;
 
 public class Graph {
+    static String largestPath = "";
+    static String smallestPath = null;
+    static int maxCost = Integer.MIN_VALUE;
+    static int minCost = Integer.MAX_VALUE;
     public static void main(String[] args) {
-        int[][] edges = {{0,1},{0,2},{1,3},{1,4},{2,3},{5,6},{5,4},{4,7},{6,7}};
+        int[][] edges = {{0,1,2},{0,2,3},{1,3,4},{1,4,2},{2,3,-1},{5,6,1},{5,4,6},{4,7,-3},{6,7,-10}};
         int n = 8;
         int[][] graph = buildGraph(edges,n);
+       
         //printGraph(graph);
         int src = 0;
-        int des = 7;
+        int des = 5;
+        int csf = 0;
         int[] visited = new int[n];
         //boolean ans = hasPath(graph,src,des,visited);
         //System.out.println("is there a path from "+src+" to "+des+"----> "+ans);
         String psf = src+"";
         visited[src] = 1;
-        multiSolver(graph,src,des,visited,psf);
+        multiSolver(graph,src,des,visited,psf,csf);
+        System.out.println(largestPath);
+        System.out.println(smallestPath);
+        System.out.println(maxCost);
+        System.out.println(minCost);
     }
 
-    private static void multiSolver(int[][] graph, int src, int des, int[] visited,String psf){
+    private static void multiSolver(int[][] graph, int src, int des, int[] visited,String psf,int csf){
         if(src == des){
+            if (csf > maxCost) {
+                maxCost = csf;
+            }
+            if (csf < minCost) {
+                minCost = csf;
+            }
+            if(psf.length() > largestPath.length()){
+                largestPath = psf;
+            }
+            if(smallestPath == null){
+                smallestPath = psf;
+            }else if(psf.length() < smallestPath.length()){
+                smallestPath = psf;
+            }
             System.out.println(psf);
             return;
         }
@@ -28,7 +52,7 @@ public class Graph {
             if(nbrs[i] != 0 && visited[i] == 0 ){
                 visited[i] = 1;
                 //System.out.println("hello before");
-                multiSolver(graph, i, des, visited,psf+"->"+i);
+                multiSolver(graph, i, des, visited,psf+"->"+i,csf+nbrs[i]);
                 visited[i] = 0;
                 //System.out.println("hello after");
             }
@@ -60,8 +84,8 @@ public class Graph {
         for(int[] edge : edges){
             int src = edge[0];
             int des = edge[1];
-            graph[src][des] = 1;
-            graph[des][src] = 1;
+            graph[src][des] = edge[2];
+            graph[des][src] = edge[2];
         }
         return graph;
     }
