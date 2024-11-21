@@ -26,7 +26,6 @@ public class Permute {
             ArrayList<ArrayList<Integer>> allPermuation = permute(currArr);
             for(int i1=0;i1<allPermuation.size();i1++){
                 //ans.add(allPermuation.get(i1).add(fixedElement));
-
                 ArrayList<Integer> curr = allPermuation.get(i1);
                 curr.add(fixedElement);
                 ans.add(curr);
