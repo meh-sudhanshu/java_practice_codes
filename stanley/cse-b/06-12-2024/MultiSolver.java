@@ -7,22 +7,34 @@ class MultiSolver{
         int countOfPalindromicSubstring = 0;
         int[][] dp = new int[n][n];
         int j = 0;
+        String largest = "";
+        String smallest = "";
         while (j < n) {
             int row = 0, col = j;
             while (col < n) {
                 if(row == col){
                     dp[row][col] = 1;
                     countOfPalindromicSubstring+=1;
+                    largest = str.substring(row, col+1);
+
                 }else if(col-row <=2 ){
                     if(str.charAt(row) == str.charAt(col)){
                         countOfPalindromicSubstring+=1;
                         dp[row][col] = 1;
+                        largest = str.substring(row, col+1);
+                        if(smallest.equals("")){
+                            smallest = str.substring(row, col+1);
+                        }
                     }
                 }else{
                     if(str.charAt(row) == str.charAt(col)){
                         if(dp[row+1][col-1] == 1){
                             dp[row][col] = 1;
                             countOfPalindromicSubstring+=1;
+                            largest = str.substring(row, col+1);
+                            if(smallest.equals("")){
+                                smallest = str.substring(row, col+1);
+                            }
                         }
                     }
                 }
@@ -31,5 +43,7 @@ class MultiSolver{
             j+=1;
         }
         System.out.println(countOfPalindromicSubstring);
+        System.out.println(smallest);
+        System.out.println(largest);
     }
 }
