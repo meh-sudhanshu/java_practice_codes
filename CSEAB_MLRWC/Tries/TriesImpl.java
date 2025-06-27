@@ -33,6 +33,22 @@ class Tries{
     public boolean startsWith(Tries root, String prefix){
         return true;
     }
+     public int dfsCount(Tries root){
+            int count = root.isEndOfWord == true ? 1 : 0;
+            for(char key : root.childrens.keySet()){
+                count+=dfsCount(root.childrens.get(key));
+            }
+        return count;
+    }
+    public int getPrefixCount(Tries root, String prefix){
+        Tries temp = root;
+        for(int i = 0; i< prefix.length(); i++){
+            char ch = prefix.charAt(i);
+            if(temp.childrens.containsKey(ch) == false) return 0;
+            temp = temp.childrens.get(ch);
+        }
+        return dfsCount(temp);
+    }
 
 
 }
@@ -40,7 +56,7 @@ class Tries{
 public class TriesImpl {
     public static void main(String[] args) {
         Tries root = new Tries();
-        String[] words = {"madam","mam","apple","max","maxi"};
+        String[] words = {"madam","maxm","apple","max","maxi"};
 
         for(String word : words){
             root.insert(root, word);
@@ -65,5 +81,7 @@ public class TriesImpl {
         System.out.println(root.search(root,"maxu"));
         System.out.println(root.search(root,"maxi"));
         System.out.println(root.search(root,"mad"));
+        System.out.println(root.getPrefixCount(root, "mam"));
+        System.out.println(root.getPrefixCount(root, "max"));
     }
 }
