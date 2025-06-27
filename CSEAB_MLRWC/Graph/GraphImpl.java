@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -153,8 +154,32 @@ public class GraphImpl {
 
         }
     }
+    public static void expand(ArrayList<Edge>[] graph, int i,boolean[] visited, StringBuilder csf){
+        visited[i] = true;
+        csf.append(i+"->");
+        ArrayList<Edge> nbrs = graph[i];
+        for(Edge edge : nbrs){
+            int nbr = edge.des;
+            if(visited[nbr]==false){
+                expand(graph, nbr, visited, csf);
+            }
+        }   
+    }
+    public static List<String> getConnectedComponents(ArrayList<Edge>[] graph, int n){
+        List<String> allComponnets = new ArrayList<>();
+        boolean[]  visited = new boolean[n];
+        for(int i = 0; i< n; i++){
+            if(visited[i] == false){
+                StringBuilder currComponent = new StringBuilder();
+                expand(graph,i,visited,currComponent);
+                allComponnets.add(currComponent.toString());
+            }
+
+        }
+        return allComponnets;
+    }
     public static void main(String[] args) {
-        int[][] edges = {{0,1,10},{0,2,5},{1,3,3},{2,3,7},{3,4,12},{4,5,34},{4,6,2},{6,7,23},{5,7,11}};
+        int[][] edges = {{0,1,10},{0,2,5},{1,3,3},{2,3,7},{4,5,34},{4,6,2},{6,7,23},{5,7,11}};
         int n = 8;
         ArrayList<Edge>[] graph = buildGraph(edges,n);
         // int[] visited = new int[n];
@@ -168,6 +193,7 @@ public class GraphImpl {
         // System.out.println(allShortestPath);
         // System.out.println(minCost);
         //bfs(graph,0);
-        dijkstra(graph, 0);
+        //dijkstra(graph, 0);
+        System.out.println(getConnectedComponents(graph, n));
     }
 }
